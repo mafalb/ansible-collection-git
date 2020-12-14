@@ -84,6 +84,7 @@ jobs:
       ANSIBLE_VERSION: ${{ matrix.ansible_version }}
       CI_CONTAINER_IMAGE: ${{ matrix.distribution }}
       CI_CONTAINER_TAG: ${{ matrix.version }}
+      CI_CONTAINER_PRIVILEGED: 1
       PY_COLORS: 1
       ANSIBLE_FORCE_COLOR: 1
       
