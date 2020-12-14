@@ -6,6 +6,10 @@
   become: true
   become_user: ci
 
+  module_defaults:
+    shell:
+      executable: /bin/bash
+
   tasks:
 
   - name: read in config does not produce errors # noqa 303
