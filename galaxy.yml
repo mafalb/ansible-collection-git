@@ -1,0 +1,26 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+namespace: mafalb
+name: git
+version: 0.0.1
+readme: README.md
+
+authors: []
+
+description: Ansible collection git
+
+license:
+- GPL-3.0-or-later
+
+tags:
+- git
+
+dependencies: {}
+
+repository: https://github.com/mafalb/ansible-collection-git
+documentation: https://github.com/mafalb/ansible-collection-git
+homepage: https://github.com/mafalb/ansible-collection-git
+issues: https://github.com/mafalb/ansible-collection-git/issues
+
+...

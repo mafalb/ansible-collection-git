@@ -1,0 +1,53 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: Verify
+  hosts: all,!infrastructure_group
+  become: true
+  become_user: ci
+
+  tasks:
+
+  - name: read in config does not produce errors
+    command: git config -l
+    changed_when: false
+
+  - name: directory is present
+    file:
+      path: ~/cirepo
+      state: directory
+
+  - name: commit to a new repo is working
+    shell: |
+      set -e
+      cd ~/cirepo/
+      git init
+      echo {{ ansible_date_time }} >bla
+      git add bla
+      git commit -m "test"
+
+  - name: create globally ignored files
+    shell: |
+      set -o pipefail
+      set -e
+      cd ~/cirepo/
+      echo {{ ansible_date_time }} >{{ item }}
+    loop:
+    - bla.swo
+    - bla.swp
+    register: _grep
+
+  - name: get untracked files
+    command: git status --porcelain
+    args:
+      chdir: ~/cirepo
+    register: _untracked 
+    changed_when: false
+    check_mode: false
+
+  - name: .gitignore does it's job
+    assert:
+      that:
+      - _untracked.stdout_lines|length == 0
+
+...

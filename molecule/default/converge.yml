@@ -1,0 +1,51 @@
+# vim: set ft=yaml ts=2 expandtab:
+---
+
+- name: Converge
+  hosts: all,!infrastructure_group
+
+  environment:
+    http_proxy: http://t_proxy:3128
+    https_proxy: http://t_proxy:3128
+
+  roles:
+  - role: mafalb.git.git
+
+  tasks:
+
+  - name: ci user is present
+    user:
+      name: ci
+
+
+- name: Converge
+  hosts: all,!infrastructure_group
+  become: true
+  become_user: ci
+
+  tasks:
+
+  - name: gather facts
+    setup:
+      gather_subset: min
+
+  - name: .gitignore is present
+    copy:
+      content: |
+        *.swo
+        *.swp
+      dest: ~/.gitignore
+      mode: 00640
+      backup: true
+    
+  - name: .gitconfig is present
+    git_config:
+      name: "{{ item.name }}"
+      value: "{{ item.value }}"
+      scope: global
+    loop:
+    - { name: user.name, value: CI Tester }
+    - { name: user.email, value: ci.tester@example.com }
+    - { name: core.excludesfile, value: "{{ ansible_user_dir }}/.gitignore" }
+
+...
