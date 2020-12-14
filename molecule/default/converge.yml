@@ -37,7 +37,7 @@
       dest: ~/.gitignore
       mode: 00640
       backup: true
-    
+
   - name: .gitconfig is present
     git_config:
       name: "{{ item.name }}"

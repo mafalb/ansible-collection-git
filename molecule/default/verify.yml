@@ -8,7 +8,7 @@
 
   tasks:
 
-  - name: read in config does not produce errors
+  - name: read in config does not produce errors # noqa 303
     command: git config -l
     changed_when: false
 
@@ -16,8 +16,9 @@
     file:
       path: ~/cirepo
       state: directory
+      mode: 00755
 
-  - name: commit to a new repo is working
+  - name: commit to a new repo is working # noqa 301
     shell: |
       set -e
       cd ~/cirepo/
@@ -26,7 +27,7 @@
       git add bla
       git commit -m "test"
 
-  - name: create globally ignored files
+  - name: create globally ignored files # noqa 301
     shell: |
       set -o pipefail
       set -e
@@ -37,11 +38,11 @@
     - bla.swp
     register: _grep
 
-  - name: get untracked files
+  - name: get untracked files # noqa 303
     command: git status --porcelain
     args:
       chdir: ~/cirepo
-    register: _untracked 
+    register: _untracked
     changed_when: false
     check_mode: false
 
