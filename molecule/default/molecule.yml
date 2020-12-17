@@ -24,6 +24,7 @@ platforms:
     internal: true
   networks:
   - name: molecule-internal
+  - name: molecule-external
   volumes:
   - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   tmpfs:

@@ -1,12 +1,12 @@
 # vim: set ft=yaml ts=2 expandtab:
 ---
 
-- name: Converge
+- name: Install git
   hosts: all,!infrastructure_group
 
-  environment:
-    http_proxy: http://t_proxy:3128
-    https_proxy: http://t_proxy:3128
+#  environment:
+#   http_proxy: http://t_proxy:3128
+#   https_proxy: http://t_proxy:3128
 
   roles:
   - role: mafalb.git.git
@@ -18,7 +18,7 @@
       name: ci
 
 
-- name: Converge
+- name: converge environment for unprivileged user
   hosts: all,!infrastructure_group
   become: true
   become_user: ci
