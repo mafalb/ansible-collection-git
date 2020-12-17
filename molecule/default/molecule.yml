@@ -27,11 +27,13 @@ platforms:
   volumes:
   - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   tmpfs:
-  - /run
   - /tmp
+  - /run
+  - /run/lock
   capabilities:
   - SYS_ADMIN
-  privileged: ${CI_CONTAINER_PRIVILEGED:-false}
+#  privileged: ${CI_CONTAINER_PRIVILEGED:-false}
+  privileged: true
   pre_build_image: ${CI_CONTAINER_PREBUILT:-false}
   tty: true
 
@@ -44,8 +46,9 @@ platforms:
   volumes:
   - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
   tmpfs:
-  - /run
   - /tmp
+  - /run
+  - /run/lock
   capabilities:
   - SYS_ADMIN
   privileged: ${CI_CONTAINER_PRIVILEGED:-false}
