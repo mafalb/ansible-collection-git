@@ -14,4 +14,3 @@ A collection for git related things.
 ## License
 
 GPLv3
-
