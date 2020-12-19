@@ -4,9 +4,9 @@
 - name: Install git
   hosts: all,!infrastructure_group
 
-#  environment:
-#   http_proxy: http://t_proxy:3128
-#   https_proxy: http://t_proxy:3128
+  environment:
+   http_proxy: http://ci-proxy:3128
+   https_proxy: http://ci-proxy:3128
 
   roles:
   - role: mafalb.git.git
