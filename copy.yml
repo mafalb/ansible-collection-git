@@ -1,0 +1,6 @@
+- hosts: t_ubuntufocal
+  tasks:
+  - name: copy test file
+    copy:
+      content: bla
+      dest: /tmp/bla
